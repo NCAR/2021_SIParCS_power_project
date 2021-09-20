@@ -1,8 +1,8 @@
 #/bin/bash
 
-#PBS -N sleepdefault
+#PBS -N waccmturbo
 #PBS -A SCSG0001
-#PBS -l walltime=00:05:00
+#PBS -l walltime=00:02:30
 
 #PBS -q regular
 #PBS -o /glade/work/sdiamond/output
@@ -14,13 +14,13 @@
 export TMPDIR=/glade/scratch/$USER/temp
 mkdir -p $TMPDIR
 
-echo "sleepdefault"
+echo "waccmturbo"
 hostname
 echo -n "" >$TMPDIR/powerout$PBS_JOBID
 while true; do sudo ipmitool dcmi power reading >>$TMPDIR/powerout$PBS_JOBID; sleep 1; done &
 pid=$!
 kstart=$(date +"%s")
-sleep 180
+mpiexec_mpt ./waccmkernel.exe >$TMPDIR/kernelout$PBS_JOBID
 kend=$(date +"%s")
 kill $pid
 

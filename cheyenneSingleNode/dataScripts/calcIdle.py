@@ -34,7 +34,7 @@ j=0
 k=0
 valueSum = 0
 timePoint = influxTimes[0]
-influxData = []
+psuData = []
 while len(influxTimes) != 0:
     if influxTimes[0] == timePoint:
         valueSum += influxValues.pop(0)
@@ -42,18 +42,18 @@ while len(influxTimes) != 0:
         j += 1
     else:
         timePoint = influxTimes[0]
-        influxData.append((valueSum/j)*9)
+        psuData.append((valueSum/j)*9)
         valueSum = 0
         k += 1
         j = 0
 
 influx.close()
 
-influxSum = 0
-for i in influxData:
-    influxSum += i
-influxAverage = influxSum/len(influxData)
+psuSum = 0
+for i in psuData:
+    psuSum += i
+psuAverage = psuSum/len(psuData)
 
-influx35Average = (influxAverage/36)*35
+35nodeAverage = (psuAverage/36)*35
 
-print(influxAverage, influx35Average)
+print(psuAverage, 35nodeAverage)

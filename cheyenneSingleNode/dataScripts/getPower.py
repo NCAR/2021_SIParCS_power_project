@@ -16,21 +16,21 @@ influxuser = sys.argv[2]
 influxpass = sys.argv[3]
 jobID = sys.argv[4]
 
-influxIdle = 6598.75 #replace this with measured average idle for 35 nodes
+psuIdle = 6598.75 #replace this with measured average idle for 35 nodes
 
-dcmiFile = jobID+".chadmin1.ib0.cheyenne.ucar.edu.OU"
-dcmiData = []
+nodeFile = jobID+".chadmin1.ib0.cheyenne.ucar.edu.OU"
+nodeData = []
 
-f=open(dcmiFile, 'r')
+f=open(nodeFile, 'r')
 for line in f:
-    dcmiData.append(line.strip())
+    nodeData.append(line.strip())
 f.close()
 
-outputFile = dcmiData.pop(0)+"Data.csv"
-IRUname = dcmiData.pop(0).partition("n")[0]+"c"
+outputFile = nodeData.pop(0)+"Data.csv"
+IRUname = nodeData.pop(0).partition("n")[0]+"c"
 
-kStart = dcmiData.pop(0)
-kEnd = dcmiData.pop(len(dcmiData)-1)
+kStart = nodeData.pop(0)
+kEnd = nodeData.pop(len(nodeData)-1)
 
 influx = influxdb.InfluxDBClient(host=influxhost, username=influxuser, password=influxpass, ssl=True, verify_ssl=False)
 results = influx.query(database="ch", query="select \"Value\" from Pout_psu where \"IRU\" = '"+IRUname+"' and time > "+kStart+"s and time < "+kEnd+"s")
@@ -47,14 +47,14 @@ j=0
 valueSum=0
 influxTimes.append(0)
 timePoint = influxTimes[0]
-influxData = []
+psuData = []
 while len(influxTimes) != 0:
     if influxTimes[0] == timePoint:
         valueSum += influxValues.pop(0)
         influxTimes.pop(0)
         j += 1
     else:
-        influxData.append(((valueSum/j)*9)-influxIdle)
+        psuData.append(((valueSum/j)*9)-psuIdle)
         valueSum = 0
         j = 0
         if influxTimes[0] == 0:
@@ -63,18 +63,18 @@ while len(influxTimes) != 0:
             timePoint = influxTimes[0]
 
 totalTime = int(kEnd) - int(kStart)
-dcmiSum = 0
-for d in dcmiData:
-    dcmiSum += int(d)
-dcmiAverage = dcmiSum/len(dcmiData)
-dcmiTotal = dcmiAverage*totalTime
+nodeSum = 0
+for d in nodeData:
+    nodeSum += int(d)
+nodeAverage = nodeSum/len(nodeData)
+nodeTotal = nodeAverage*totalTime
 
-influxSum = 0
-for i in influxData:
-    influxSum += i
-influxAverage = influxSum/len(influxData)
-influxTotal = influxAverage*totalTime
+psuSum = 0
+for i in psuData:
+    psuSum += i
+psuAverage = psuSum/len(psuData)
+psuTotal = psuAverage*totalTime
 
 fout=open(outputFile, 'a')
-fout.write(str(dcmiTotal)+","+str(influxTotal)+","+str(totalTime)+"\n")
+fout.write(str(nodeTotal)+","+str(psuTotal)+","+str(totalTime)+"\n")
 fout.close()

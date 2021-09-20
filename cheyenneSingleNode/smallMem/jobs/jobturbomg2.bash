@@ -1,6 +1,6 @@
 #/bin/bash
 
-#PBS -N mg2default
+#PBS -N mg2turbo
 #PBS -A SCSG0001
 #PBS -l walltime=00:02:30
 
@@ -14,7 +14,7 @@
 export TMPDIR=/glade/scratch/$USER/temp
 mkdir -p $TMPDIR
 
-echo "mg2default"
+echo "mg2turbo"
 hostname
 echo -n "" >$TMPDIR/powerout$PBS_JOBID
 while true; do sudo ipmitool dcmi power reading >>$TMPDIR/powerout$PBS_JOBID; sleep 1; done &

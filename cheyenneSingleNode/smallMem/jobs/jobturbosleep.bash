@@ -1,8 +1,8 @@
 #/bin/bash
 
-#PBS -N clubbdefault
+#PBS -N sleepturbo
 #PBS -A SCSG0001
-#PBS -l walltime=00:02:30
+#PBS -l walltime=00:05:00
 
 #PBS -q regular
 #PBS -o /glade/work/sdiamond/output
@@ -14,13 +14,13 @@
 export TMPDIR=/glade/scratch/$USER/temp
 mkdir -p $TMPDIR
 
-echo "clubbdefault"
+echo "sleepturbo"
 hostname
 echo -n "" >$TMPDIR/powerout$PBS_JOBID
 while true; do sudo ipmitool dcmi power reading >>$TMPDIR/powerout$PBS_JOBID; sleep 1; done &
 pid=$!
 kstart=$(date +"%s")
-mpiexec_mpt ./clubbkernel.exe >$TMPDIR/kernelout$PBS_JOBID
+sleep 180
 kend=$(date +"%s")
 kill $pid
 
