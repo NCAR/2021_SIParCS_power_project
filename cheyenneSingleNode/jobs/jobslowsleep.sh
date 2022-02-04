@@ -1,19 +1,19 @@
 #/bin/bash
 
-#PBS -N sleeprated
+#PBS -N sleepslow
 #PBS -A SCSG0001
 #PBS -l walltime=00:05:00
 #PBS -l select=cpufreq=slow
-#PBS -q regular
 #PBS -o /glade/work/sdiamond/output
 #PBS -e /glade/scratch/sdiamond/temp/error
-#PBS -l select=1:nodetype=smallmem:ncpus=36:mpiprocs=36
+#PBS -l select=1:ncpus=36:mpiprocs=36
 #PBS -m abe
 #PBS -M sdiamond@ucar.edu
 
 export TMPDIR=/glade/scratch/$USER/temp
 mkdir -p $TMPDIR
 
+echo $PBS_JOBID >> /glade/work/sdiamond/output/jobIDlist
 echo "sleepslow"
 hostname
 echo -n "" >$TMPDIR/powerout$PBS_JOBID
