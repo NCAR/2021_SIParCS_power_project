@@ -4,6 +4,7 @@
 #PBS -A SCSG0001
 #PBS -l walltime=00:02:30
 
+#PBS -q regular
 #PBS -o /glade/work/sdiamond/output
 #PBS -e /glade/scratch/sdiamond/temp/error
 #PBS -l select=1:ncpus=36:mpiprocs=36

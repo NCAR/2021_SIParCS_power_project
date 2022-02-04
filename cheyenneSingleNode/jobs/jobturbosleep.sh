@@ -3,6 +3,7 @@
 #PBS -N sleepturbo
 #PBS -A SCSG0001
 #PBS -l walltime=00:05:00
+#PBS -q regular
 
 #PBS -o /glade/work/sdiamond/output
 #PBS -e /glade/scratch/sdiamond/temp/error
