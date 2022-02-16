@@ -1,9 +1,8 @@
 #/bin/bash
 
-#PBS -N changetoslow
+#PBS -N changetoturbo
 #PBS -A SCSG0001
 #PBS -l walltime=00:00:30
-#PBS -l select=cpufreq=slow
 #PBS -q regular
 #PBS -j oe
 #PBS -k oe
