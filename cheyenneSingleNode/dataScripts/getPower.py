@@ -29,7 +29,7 @@ for jobID in IDlist:
  f.close()
  
  outName = nodeData.pop(0)
- outputFile = outName+"Data.csv"
+ outputFile = "Data.csv"
  IRUname = nodeData.pop(0).partition("n")[0]+"c"
  
  kStart = nodeData.pop(0)
@@ -42,13 +42,6 @@ for jobID in IDlist:
  nodeAverage = nodeSum/len(nodeData)
  nodeTotal = nodeAverage*totalTime
 
-# psuSum = 0
-# for i in psuData:
-#     psuSum += i
-# psuAverage = psuSum/len(psuData)
-# psuTotal = psuAverage*totalTime
-	
  fout=open(outputFile, 'a')
-# fout.write(outName+","+str(nodeTotal)+","+str(psuTotal)+","+str(totalTime)+"\n")
  fout.write(outName+","+str(nodeTotal)+",0,"+str(totalTime)+"\n")
  fout.close()
