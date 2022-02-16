@@ -43,5 +43,5 @@ for jobID in IDlist:
  nodeTotal = nodeAverage*totalTime
 
  fout=open(outputFile, 'a')
- fout.write(outName+","+str(nodeTotal)+",0,"+str(totalTime)+"\n")
+ fout.write(outName+","+str(nodeTotal)+","+str(totalTime)+"\n")
  fout.close()
