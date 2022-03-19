@@ -3,11 +3,10 @@
 #PBS -N changetorated
 #PBS -A SCSG0001
 #PBS -l walltime=00:00:30
-#PBS -l select=cpufreq=rated
 #PBS -q regular
 #PBS -j oe
 #PBS -k oe
-#PBS -l select=1:ncpus=36:mpiprocs=36
+#PBS -l select=1:ncpus=36:mpiprocs=36:cpufreq=rated
 #PBS -m abe
 #PBS -M sdiamond@ucar.edu
 
