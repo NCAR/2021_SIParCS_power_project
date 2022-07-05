@@ -11,10 +11,15 @@ dataFile = sys.argv[1]
 csvfile = open(dataFile)
 data = np.loadtxt(csvfile, delimiter=",", dtype="int")
 
-fout=open(dataFile, 'w')
+power = []
+times = []
 for j in range(0, len(data)):
     dt = mount.localize(datetime.datetime(data[j][6],data[j][1],data[j][2],data[j][3],data[j][4],data[j][5]))
     utcdt = dt.astimezone(pytz.utc)
-    timestamp = int(utcdt.timestamp())
-    fout.write(str(data[j][0])+','+str(timestamp)+'\n')
+    times[j] = int(utcdt.timestamp())
+    power[j] = data[j][0]
+
+fout=open(dataFile, 'w')
+for k in range(0, len(power)):
+    fout.write(str(power[k])+','+str(times[k])+'\n')
 fout.close()
