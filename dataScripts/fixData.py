@@ -5,6 +5,7 @@ from pytz import timezone
 import csv
 import numpy as np
 import sys
+from scipy import interpolate
 
 mount = timezone('US/Mountain')
 dataFile = sys.argv[1]
@@ -16,10 +17,14 @@ times = []
 for j in range(0, len(data)):
     dt = mount.localize(datetime.datetime(data[j][6],data[j][1],data[j][2],data[j][3],data[j][4],data[j][5]))
     utcdt = dt.astimezone(pytz.utc)
-    times[j] = int(utcdt.timestamp())
-    power[j] = data[j][0]
+    times.append(int(utcdt.timestamp()))
+    power.append(data[j][0])
+
+spl = interpolate.splrep(times,power)
+for t in range(times[0],times[len(times)-1]):
+    print(t)
 
 fout=open(dataFile, 'w')
 for k in range(0, len(power)):
-    fout.write(str(power[k])+','+str(times[k])+'\n')
+    fout.write(str(times[k])+','+str(power[k])+'\n')
 fout.close()
