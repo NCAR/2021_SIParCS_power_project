@@ -21,14 +21,8 @@ for j in range(0, len(data)):
     power.append(data[j][0])
 
 spl = interpolate.splrep(times,power)
-check = 0
-while check == 0:
-    check = 1
-    for t in range(1,len(times)-1):
-        if (times[t]-1) != times[t-1]:
-            times.insert(t,times[t-1]+1)
-            power.insert(t,interpolate.splev(times[t-1]+1, spl))
-            check = 0
+for t in range(times[0],times[len(times)-1]):
+    print(t)
 
 fout=open(dataFile, 'w')
 for k in range(0, len(power)):
