@@ -1,6 +1,6 @@
 #!/bin/bash
-jobnode=$(echo $1 | sed 's/^[a-z]*//')
+jobnode=$1
 
 #conda activate npl
-./prepoutput.sh powerout$jobnode
+./prepoutput.sh $jobnode
 python3 fixData.py $jobnode
