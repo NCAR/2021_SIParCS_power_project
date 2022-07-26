@@ -1,6 +1,5 @@
 #!/bin/bash
-jobnode=$1
 
 #conda activate npl
-./prepoutput.sh $jobnode
-python3 fixData.py $jobnode
+
+for file in `ls | grep $1`; do ./prepoutput.sh $file; python3 fixData.py $file; done
