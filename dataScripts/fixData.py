@@ -24,10 +24,10 @@ spl = interpolate.splrep(times,power)
 check = 0
 while check == 0:
     check = 1
-    for t in range(1,len(times)-1):
-        if (times[t]-1) != times[t-1]:
-            times.insert(t,times[t-1]+1)
-            power.insert(t,interpolate.splev(times[t-1]+1, spl))
+    for t in range(0,len(times)-1):
+        if (times[t]+1) != times[t+1]:
+            times.insert(t+1,times[t]+1)
+            power.insert(t+1,interpolate.splev(times[t]+1, spl))
             check = 0
 
 fout=open(dataFile, 'w')
