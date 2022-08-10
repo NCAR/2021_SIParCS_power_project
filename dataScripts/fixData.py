@@ -6,9 +6,12 @@ import csv
 import numpy as np
 import sys
 from scipy import interpolate
+from scipy import integrate
 
 mount = timezone('US/Mountain')
 dataFile = sys.argv[1]
+jID = dataFile.split("_")[0]
+jNode = dataFile.split("_")[1].split(".")[0]
 csvfile = open(dataFile)
 data = np.loadtxt(csvfile, delimiter=",", dtype="int")
 
@@ -19,6 +22,9 @@ for j in range(0, len(data)):
     utcdt = dt.astimezone(pytz.utc)
     times.append(int(utcdt.timestamp()))
     power.append(data[j][0])
+
+totJ = integrate.simps(power,times)
+totT = times[len(times)-1] - times[0]
 
 spl = interpolate.splrep(times,power)
 check = 0
@@ -34,3 +40,7 @@ fout=open(dataFile, 'w')
 for k in range(0, len(power)):
     fout.write(str(times[k])+','+str(power[k])+'\n')
 fout.close()
+
+gout=open(jID + "Data.csv", 'a')
+gout.write(jNode +','+ str(totJ) +','+ str(totT) +'\n')
+gout.close()
