@@ -23,7 +23,7 @@ for j in range(0, len(data)):
     times.append(int(utcdt.timestamp()))
     power.append(data[j][0])
 
-totJ = integrate.simps(power,times)
+totJ = round(integrate.simps(power,times))
 totT = times[len(times)-1] - times[0]
 
 spl = interpolate.splrep(times,power)
@@ -33,7 +33,7 @@ while check == 0:
     for t in range(0,len(times)-1):
         if (times[t]+1) != times[t+1]:
             times.insert(t+1,times[t]+1)
-            power.insert(t+1,interpolate.splev(times[t]+1, spl))
+            power.insert(t+1,round(interpolate.splev(times[t]+1, spl)))
             check = 0
 
 fout=open(dataFile, 'w')
