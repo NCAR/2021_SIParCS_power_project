@@ -18,8 +18,8 @@ pSum = 0
 n = 0
 
 for k in data:
-    tSum += int(k.split(",")[0])
-    pSum += int(k.split(",")[1])
+    tSum += int(k.split(",")[1])
+    pSum += int(k.split(",")[2])
     n += 1
 
 tAve = round(tSum/n)
