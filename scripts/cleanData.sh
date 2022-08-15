@@ -2,10 +2,12 @@
 
 #conda activate npl
 
-for file in `ls | grep "${1}_"`
+for jid in `cat jobIDlist.txt | uniq`
 do
-  ./prepoutput.sh $file
-  python3 fixData.py $file.csv
+  for file in `ls | grep "${jid}_"`
+  do
+    ./prepoutput.sh $file
+    python3 fixData.py $file.csv
+  done
+  python3 collateData.py $jid
 done
-
-python3 collateData.py $1
