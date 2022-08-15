@@ -56,6 +56,9 @@ fout.close()
 
 if totJ == 0:
     print("dcmi power reading failure: "+ dataFile.split(".")[0])
+    hout=open("failedJobIDlist.txt", 'a')
+    hout.write(jID +'\n')
+    hout.close()
 else:
     gout=open(jID + "Data.csv", 'a')
     gout.write(jNode +','+ str(totT) +','+ str(round(totJ)) +'\n')
