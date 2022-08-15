@@ -13,17 +13,17 @@ for line in m:
 m.close()
 
 jName = data.pop(0)
-tSum = 0
+tTot = 0
 pSum = 0
 n = 0
 
 for k in data:
-    tSum += int(k.split(",")[1])
+    newT = int(k.split(",")[1])
+    if newT > tTot:
+        tTot = newT
     pSum += int(k.split(",")[2])
     n += 1
 
-tAve = round(tSum/n)
-
 f=open("Data.csv", 'a')
-f.write(jName +','+ str(tAve) +','+ str(pSum) +'\n')
+f.write(jName +','+ str(tTot) +','+ str(pSum) +'\n')
 f.close()
