@@ -25,5 +25,5 @@ for k in data:
     n += 1
 
 f=open("Data.csv", 'a')
-f.write(jName +','+ str(tMax) +','+ str(pSum) +'\n')
+f.write(jName +','+ jID +','+ str(tMax) +','+ str(pSum) +'\n')
 f.close()
