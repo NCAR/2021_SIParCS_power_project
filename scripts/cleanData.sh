@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#conda activate npl
-
 for jid in `cat jobIDlist.txt | uniq`
 do
   for file in `ls | grep "${jid}_"`
@@ -11,3 +9,6 @@ do
   done
   python3 collateData.py $jid
 done
+
+rm jobIDlist.txt
+touch jobIDlist.txt
