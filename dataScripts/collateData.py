@@ -25,5 +25,5 @@ for k in data:
 tAve = round(tSum/n)
 
 f=open("Data.csv", 'a')
-f.write(jName +','+ str(tAve) +','+ str(nSum) +'\n')
+f.write(jName +','+ str(tAve) +','+ str(pSum) +'\n')
 f.close()
