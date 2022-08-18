@@ -1,5 +1,6 @@
 #!/bin/bash
 
+touch failedJobIDlist.txt
 for jid in `cat jobIDlist.txt | uniq`
 do
   for file in `ls ${jid}_*`
@@ -19,4 +20,3 @@ done
 rm jobIDlist.txt
 rm failedJobIDlist.txt
 touch jobIDlist.txt
-touch failedJobIDlist.txt
