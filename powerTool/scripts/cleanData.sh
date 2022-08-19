@@ -2,8 +2,8 @@
 
 datadir=$(echo $PWD | sed 's%scripts%data%')
 touch $datadir/Data.csv
-touch failedJobIDlist.txt
-for jid in `cat jobIDlist.txt | uniq`
+touch $PWD/failedJobIDlist.txt
+for jid in `cat $PWD/jobIDlist.txt | uniq`
 do
   for file in `ls $datadir/${jid}_*`
   do
@@ -13,11 +13,11 @@ do
   python3 collateData.py $datadir $jid
 done
 
-for jid in `cat failedJobIDlist.txt | uniq`
+for jid in `cat $PWD/failedJobIDlist.txt | uniq`
 do
   sed -i "/$jid/d" $datadir/Data.csv
   rm $datadir/${jid}*
 done
 
-rm jobIDlist.txt
-rm failedJobIDlist.txt
+rm $PWD/jobIDlist.txt
+rm $PWD/failedJobIDlist.txt
