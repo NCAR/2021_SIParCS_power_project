@@ -3,8 +3,9 @@ import csv
 import numpy as np
 import sys
 
-jID = sys.argv[1]
-datafile = jID+"Data.csv"
+pwd = sys.argv[1]
+jID = sys.argv[2]
+datafile = pwd +"/"+ jID +"Data.csv"
 
 data = []
 m=open(datafile, 'r')
@@ -24,6 +25,6 @@ for k in data:
     pSum += int(k.split(",")[2])
     n += 1
 
-f=open("Data.csv", 'a')
+f=open(pwd +"/Data.csv", 'a')
 f.write(jName +','+ jID +','+ str(tMax) +','+ str(pSum) +'\n')
 f.close()

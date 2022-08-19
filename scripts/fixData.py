@@ -10,10 +10,13 @@ from scipy import integrate
 
 mount = timezone('US/Mountain')
 dataFile = sys.argv[1]
-jID = dataFile.split("_")[0]
-jNode = dataFile.split("_")[1].split(".")[0]
+pwd = dataFile.rsplit("/",1)[0]
+fileName = dataFile.rsplit("/",1)[1]
+jID = fileName.split("_")[0]
+jNode = fileName.split("_")[1].split(".")[0]
 csvFile = open(dataFile)
 data = np.loadtxt(csvFile, delimiter=",", dtype="int")
+csvFile.close()
 
 power = []
 times = []
@@ -55,11 +58,11 @@ for k in range(len(power)):
 fout.close()
 
 if totJ == 0:
-    print("dcmi power reading failure: "+ dataFile.split(".")[0])
+    print("dcmi power reading failure: "+ fileName.split(".")[0])
     hout=open("failedJobIDlist.txt", 'a')
     hout.write(jID +'\n')
     hout.close()
 else:
-    gout=open(jID + "Data.csv", 'a')
+    gout=open(pwd +"/"+ jID + "Data.csv", 'a')
     gout.write(jNode +','+ str(totT) +','+ str(round(totJ)) +'\n')
     gout.close()
