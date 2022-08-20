@@ -58,7 +58,10 @@ for k in range(len(power)):
 fout.close()
 
 if totJ == 0:
-    print("dcmi power reading failure: "+ fileName.split(".")[0])
+    yout=open(pwd +"/"+ jID + "Data.csv", 'r')
+    jName = yout.readline().strip()
+    yout.close()
+    print("dcmi power reading failure: "+ fileName.split(".")[0] +" - "+ jName)
     hout=open("failedJobIDlist.txt", 'a')
     hout.write(jID +'\n')
     hout.close()
