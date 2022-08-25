@@ -8,7 +8,7 @@ do
   for file in `ls $datadir/${jid}_*`
   do
     ./prepoutput.sh $file
-    python3 inteData.py $file.csv
+    python3 fixData.py $file.csv
   done
   python3 collateData.py $datadir $jid
 done
