@@ -9,3 +9,4 @@ paste -sd ',\n' $jobnode >> ${jobnode}temp #replace newlines with commas, combin
 mv ${jobnode}temp $jobnode
 sed -i 's/  /,/g;s/[ :]/,/g' $jobnode #change to full csv format
 mv $jobnode $jobnode.csv #add suffix to file
+python3 fixTime.py $jobnode.csv

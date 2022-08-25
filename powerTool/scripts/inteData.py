@@ -1,14 +1,10 @@
 #!/bin/ env python
-import datetime
-import pytz
-from pytz import timezone
 import csv
 import numpy as np
 import sys
 from scipy import interpolate
 from scipy import integrate
 
-mount = timezone('US/Mountain')
 dataFile = sys.argv[1]
 pwd = dataFile.rsplit("/",1)[0]
 fileName = dataFile.rsplit("/",1)[1]
@@ -18,13 +14,11 @@ csvFile = open(dataFile)
 data = np.loadtxt(csvFile, delimiter=",", dtype="int")
 csvFile.close()
 
-power = []
 times = []
+power = []
 for j in range(len(data)):
-    dt = mount.localize(datetime.datetime(data[j][6],data[j][1],data[j][2],data[j][3],data[j][4],data[j][5]))
-    utcdt = dt.astimezone(pytz.utc)
-    times.append(int(utcdt.timestamp()))
-    power.append(data[j][0])
+    times.append(data[j][0])
+    power.append(data[j][1])
 
 cTimes = times.copy()
 m = 0
