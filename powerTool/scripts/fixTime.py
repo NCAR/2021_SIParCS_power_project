@@ -3,6 +3,7 @@ import datetime
 import pytz
 from pytz import timezone
 import csv
+import numpy as np
 import sys
 
 mount = timezone('US/Mountain')
