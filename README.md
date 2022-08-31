@@ -9,8 +9,8 @@ After your jobs have finished, cd to powerTool/scripts, activate npl, and run ./
 
 
 Now in the powerTool/data directory there will be three kinds of files:
-one file per node, containing instantaneous power readings for each second during execution with timestamps, called <JobID>_<nodename>.csv
-one file per job, containing the name of the job and one line for each node with the total time the node was active and the total energy used by the node, called <JobID>Data.csv
+one file per node, containing instantaneous power readings for each second during execution with timestamps, called \<JobID\>\_\<nodename\>.csv
+one file per job, containing the name of the job and one line for each node with the total time the node was active and the total energy used by the node, called \<JobID\>Data.csv
 and a single Data.csv file, containing one line per job with the job id, the name of the job, the total wall time, and the total energy for the job
 
 
@@ -20,7 +20,7 @@ collateData.py: Gets per node data from <JobID>Data.csv, finds the largest wall 
 
 doPowerCollect.sh: Writes job ID to jobIDlist.txt, runs powerDataCollect.sh in the background on each node through ssh
 
-fixData.py: Checks for and removes repeated data points, integrates over existing data to find total energy, finds total time, interpolates missing data points, writes interpolated data back to <JobID>_<nodename>.csv, and writes totals to <JobID>Data.csv. Also checks for power reading failures, and writes job ID to failedJobIDlist.txt and prints the name of the job to standard out if found
+fixData.py: Checks for and removes repeated data points, integrates over existing data to find total energy, finds total time, interpolates missing data points, writes interpolated data back to \<JobID\>\_\<nodename\>.csv, and writes totals to \<JobID\>Data.csv. Also checks for power reading failures, and writes job ID to failedJobIDlist.txt and prints the name of the job to standard out if found
 
 fixTime.py: Converts reading times from datetime format to Unix timestamp
 
