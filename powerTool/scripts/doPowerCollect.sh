@@ -1,6 +1,7 @@
 #!/bin/bash
 
 powerdir=/glade/work/$USER/powerTool
+mkdir -p $powerdir/data
 PID=`echo  $PBS_JOBID | head -c 7`
 echo $PBS_JOBNAME > $powerdir/data/${PID}Data.csv
 echo $PID >> $powerdir/scripts/jobIDlist.txt
