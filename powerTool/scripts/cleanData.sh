@@ -1,6 +1,7 @@
 #!/bin/bash
 
 datadir=$(echo $PWD | sed 's%scripts%data%')
+mkdir -p $datadir
 touch $datadir/Data.csv
 touch $PWD/failedJobIDlist.txt
 for jid in `cat $PWD/jobIDlist.txt | uniq`
